@@ -1,119 +1,54 @@
-# Embedded Final Project: E-Waste Sorter Dashboard
+# E-Waste Sorter Embedded Project & Dashboard
 
-An advanced IoT-enabled E-Waste sorting system. This repository contains the system configurations, battery metadata, and the web-based monitoring dashboard. The dashboard receives live sensor telemetry over MQTT (WebSockets) and records sorting events in a Firebase Realtime Database for visualization and tracking.
+This repository contains the source code for an Embedded Final Project, featuring an **E-Waste Sorter** and a real-time web dashboard built with Vue.js, Vite, MQTT, and Firebase.
 
----
+## 🚀 For Co-Developers: How to Clone the Repository
 
-## 📁 Project Structure
-
-```text
-Embedded-Final-Project/
-├── .gitignore                   # Root Git ignore configuration
-├── README.md                    # Main project documentation (this file)
-├── Battery handling.json        # Embedded system battery handling parameters
-└── ewaste-dashboard/            # Vue.js 3 + Vite 6 web application
-    ├── package.json             # Frontend dependencies & scripts
-    ├── vite.config.js           # Vite development server configuration
-    ├── index.html               # Main application entry point
-    └── src/                     # Vue source code
-        ├── main.js              # Vue app initialization
-        ├── App.vue              # Main Dashboard view (MQTT + Firebase integrations)
-        └── assets/              # Standard assets and styles
-```
-
----
-
-## 🚀 How to Clone the Repository (For Co-Developers)
-
-To get a local copy of this project on your machine, open your terminal (Git Bash, Command Prompt, or PowerShell) and run:
+To start working on this project, clone the repository to your local machine using the HTTPS URL:
 
 ```bash
 # Clone the repository
 git clone https://github.com/Zendrii04/Embedded-Final-Project.git
 
-# Navigate into the project root directory
+# Navigate into the project folder
 cd Embedded-Final-Project
 ```
 
----
-
 ## 🛠️ How to Set It Up Properly
 
-### 1. Prerequisites
-Ensure you have **Node.js** installed on your system:
-* **Recommended Node version**: `v20.10.0` or higher.
-* To check your Node version, run `node -v` in your terminal.
+The web dashboard is located in the `ewaste-dashboard` folder. You need Node.js (version 20.10.0 or compatible) to install the dependencies.
 
-### 2. Install Dependencies
-Navigate into the dashboard project directory and install the required npm packages:
+1. **Navigate to the dashboard directory:**
+   ```bash
+   cd ewaste-dashboard
+   ```
 
-```bash
-# Move into the frontend application directory
-cd ewaste-dashboard
+2. **Install all required dependencies:**
+   ```bash
+   npm install
+   ```
 
-# Install all project dependencies
-npm install
-```
-This will install `vue`, `vite`, `firebase`, `mqtt`, `chart.js`, and `vue-chartjs` cleanly.
+3. **Configure API Keys & Connections:**
+   Before running the app, you need to add your own configuration details. Open `ewaste-dashboard/src/App.vue` and update:
+   - Your **Firebase Config** (`apiKey`, `authDomain`, `databaseURL`, `projectId`).
+   - Your **MQTT Broker credentials** (`wss://YOUR_HIVEMQ_CLUSTER_URL`, `username`, `password`).
 
-### 3. Database & MQTT Credentials Configuration
-Open the file [`ewaste-dashboard/src/App.vue`](file:///c:/Users/Dan%20Zendrich%20Reyes/OneDrive/Documents/Embedded%20Final%20Project/ewaste-dashboard/src/App.vue) and update the configuration placeholders with your actual project credentials:
+## ▶️ How to Run It Properly
 
-#### A. Firebase Realtime Database
-Replace the credentials in `firebaseConfig`:
-```javascript
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-  projectId: "YOUR_PROJECT",
-};
-```
+Once the setup is complete, you can start the local development server to view the dashboard in your browser.
 
-#### B. HiveMQ / MQTT Broker
-Update the WebSocket broker connection details in `onMounted()`:
-```javascript
-// Connect to HiveMQ Cloud via secure WebSockets
-const client = mqtt.connect('wss://YOUR_HIVEMQ_CLUSTER_URL:8884/mqtt', {
-  username: 'YOUR_USERNAME',
-  password: 'YOUR_PASSWORD'
-})
-```
+1. **Ensure you are in the dashboard directory:**
+   ```bash
+   cd ewaste-dashboard
+   ```
 
----
+2. **Start the Vite development server:**
+   ```bash
+   npm run dev
+   ```
 
-## 🖥️ How to Run It Properly
+3. **Open the Dashboard:**
+   Open your browser and navigate to the local URL provided in your terminal (usually `http://localhost:5173`).
 
-All the running commands must be executed from inside the **`ewaste-dashboard`** directory.
-
-### 1. Start the Local Development Server
-Launch the local dev environment with hot-reload enabled:
-
-```bash
-npm run dev
-```
-Once started, open your browser and navigate to `http://localhost:5173/` (or the URL shown in your console).
-
-### 2. Compile and Build for Production
-To generate a fully optimized build folder ready for deployment (under the `dist/` directory):
-
-```bash
-npm run build
-```
-
-### 3. Preview Production Build Locally
-Verify the production build locally before hosting:
-
-```bash
-npm run preview
-```
-
----
-
-## ⚡ Tech Stack & Libraries Used
-
-* **Frontend Framework**: Vue.js 3 (Composition API)
-* **Build System**: Vite 6 (Configured for compatibility with older Node versions)
-* **Realtime Database**: Firebase Realtime Database SDK
-* **MQTT Telemetry**: MQTT.js (via WebSockets for browser-based subscriptions)
-* **Charting & Visualization**: Chart.js & vue-chartjs
+4. **Hardware Integration:**
+   To see live data, ensure your embedded hardware (e.g., ESP32/Arduino) is powered on, connected to the internet, and publishing to the correct MQTT topic (`ewaste/sort/events`).
