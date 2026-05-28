@@ -173,7 +173,8 @@ const handleLogout = async () => {
 body {
   margin: 0;
   padding: 0;
-  background-color: #f5f7fa;
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 </style>
 
@@ -184,11 +185,12 @@ body {
   align-items: center;
   height: 100vh;
   font-size: 1.5rem;
-  color: #666;
+  color: #94a3b8;
+  background-color: #0f172a;
 }
 
 .dashboard {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -198,14 +200,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e1e4e8;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #1e293b;
 }
 
 .header h1 {
   margin: 0;
-  color: #2c3e50;
+  color: #f8fafc;
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .header-controls {
@@ -215,68 +220,85 @@ body {
 }
 
 .status-badge {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
-  background-color: #e74c3c;
-  color: white;
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
   font-size: 0.85em;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .status-badge.connected {
-  background-color: #42b883;
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .control-panel {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
   display: flex;
   gap: 15px;
+  border: 1px solid #334155;
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
 }
 
-.btn:hover {
-  opacity: 0.85;
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
-  background-color: #42b883;
-  color: white;
+  background-color: #38bdf8;
+  color: #0f172a;
+}
+.btn-primary:hover {
+  background-color: #0ea5e9;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
 .btn-danger {
-  background-color: #e74c3c;
+  background-color: #ef4444;
   color: white;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
 }
 
 .logout-btn {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  background-color: transparent;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border: 1px solid #334155;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
 .logout-btn:hover {
-  background-color: #eee;
+  background-color: #334155;
+  color: #f8fafc;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 25px;
 }
 
 .full-width {

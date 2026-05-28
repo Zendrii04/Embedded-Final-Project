@@ -52,20 +52,31 @@ const chartOptions = {
   animation: {
     duration: 500 // smooth transition for live data
   },
+  plugins: {
+    legend: {
+      labels: { color: '#f8fafc' }
+    }
+  },
   scales: {
     y: {
       beginAtZero: true,
       max: 5,
       title: {
         display: true,
-        text: 'Voltage (V)'
-      }
+        text: 'Voltage (V)',
+        color: '#94a3b8'
+      },
+      grid: { color: '#334155' },
+      ticks: { color: '#94a3b8' }
     },
     x: {
       title: {
         display: true,
-        text: 'Time'
-      }
+        text: 'Time',
+        color: '#94a3b8'
+      },
+      grid: { color: '#334155' },
+      ticks: { color: '#94a3b8' }
     }
   }
 }
@@ -82,16 +93,19 @@ const chartOptions = {
 
 <style scoped>
 .chart-container {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  border: 1px solid #334155;
 }
 .chart-container h3 {
   margin-top: 0;
-  color: #333;
+  color: #f8fafc;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 .chart-wrapper {
   position: relative;

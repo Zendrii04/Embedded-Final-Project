@@ -48,17 +48,21 @@ const formatTime = (timestamp) => {
 
 <style scoped>
 .table-container {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   max-height: 400px;
+  border: 1px solid #334155;
 }
 .table-container h3 {
   margin-top: 0;
-  color: #333;
+  color: #f8fafc;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 15px;
 }
 .table-scroll {
   overflow-y: auto;
@@ -67,38 +71,52 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  color: #cbd5e1;
 }
 th, td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  padding: 12px 15px;
+  border-bottom: 1px solid #334155;
 }
 th {
-  background-color: #f9f9f9;
+  background-color: #0f172a;
+  color: #94a3b8;
   position: sticky;
   top: 0;
   z-index: 1;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85em;
+}
+tr:hover {
+  background-color: rgba(51, 65, 85, 0.5);
 }
 .empty-state {
   text-align: center;
-  color: #999;
-  padding: 20px;
+  color: #64748b;
+  padding: 30px;
+  font-style: italic;
 }
 .badge {
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 12px;
   font-size: 0.85em;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 .badge.li-ion {
-  background-color: #f87979;
-  color: white;
+  background-color: rgba(248, 121, 121, 0.2);
+  color: #f87979;
+  border: 1px solid rgba(248, 121, 121, 0.3);
 }
 .badge.alkaline {
-  background-color: #36a2eb;
-  color: white;
+  background-color: rgba(54, 162, 235, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(54, 162, 235, 0.3);
 }
 .badge.nimh {
-  background-color: #ffcd56;
-  color: #333;
+  background-color: rgba(255, 205, 86, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(255, 205, 86, 0.3);
 }
 </style>
