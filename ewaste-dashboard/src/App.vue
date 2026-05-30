@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import mqtt from 'mqtt'
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref as dbRef, push } from 'firebase/database'
-import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 
 import LiveVoltageChart from './components/LiveVoltageChart.vue'
 import BatteryBarChart from './components/BatteryBarChart.vue'
@@ -31,16 +31,27 @@ const isAuthReady = ref(false)
 const email = ref('')
 const password = ref('')
 const loginError = ref('')
+const isSignUpMode = ref(false)
+const showPassword = ref(false)
 
-const handleLogin = async () => {
+const handleAuth = async () => {
   try {
     loginError.value = ''
-    await signInWithEmailAndPassword(auth, email.value, password.value)
+    if (isSignUpMode.value) {
+      await createUserWithEmailAndPassword(auth, email.value, password.value)
+    } else {
+      await signInWithEmailAndPassword(auth, email.value, password.value)
+    }
     email.value = ''
     password.value = ''
   } catch (error) {
     loginError.value = error.message
   }
+}
+
+const toggleMode = () => {
+  isSignUpMode.value = !isSignUpMode.value
+  loginError.value = ''
 }
 
 // Dashboard state
@@ -148,11 +159,20 @@ const handleLogout = async () => {
     <!-- Simple Login UI overlay -->
     <div v-if="!isAuthenticated" class="login-overlay-container">
       <div class="login-panel">
-        <h2>Admin Login</h2>
+        <h2>{{ isSignUpMode ? 'Sign Up' : 'Admin Login' }}</h2>
         <div class="login-form">
           <input type="email" v-model="email" placeholder="Email" class="auth-input" />
-          <input type="password" v-model="password" placeholder="Password" class="auth-input" />
-          <button @click="handleLogin" class="btn btn-primary">Log In</button>
+          <div class="password-input-wrapper">
+            <input :type="showPassword ? 'text' : 'password'" v-model="password" placeholder="Password" class="auth-input" />
+            <button class="icon-btn" @click="showPassword = !showPassword" type="button" title="Toggle Password Visibility">
+              <span v-if="showPassword">🙈</span>
+              <span v-else>👁️</span>
+            </button>
+          </div>
+          <button @click="handleAuth" class="btn btn-primary">{{ isSignUpMode ? 'Sign Up' : 'Log In' }}</button>
+          <button @click="toggleMode" class="switch-mode-btn" type="button">
+            {{ isSignUpMode ? 'Already have an account? Log In' : 'Need an account? Sign Up' }}
+          </button>
         </div>
         <p v-if="loginError" class="error-msg">{{ loginError }}</p>
       </div>
@@ -368,11 +388,57 @@ body {
   background-color: #0f172a;
   color: #f8fafc;
   font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .auth-input:focus {
   outline: none;
   border-color: #38bdf8;
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper .auth-input {
+  padding-right: 40px; /* Space for the icon */
+}
+
+.icon-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.icon-btn:hover {
+  color: #f8fafc;
+}
+
+.switch-mode-btn {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.switch-mode-btn:hover {
+  color: #0ea5e9;
 }
 
 .error-msg {
