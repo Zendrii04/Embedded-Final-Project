@@ -66,11 +66,10 @@ onMounted(() => {
 })
 
 const connectMQTT = () => {
-  connectionStatus.value = 'Connecting…'
-  const client = mqtt.connect('wss://YOUR_HIVEMQ_CLUSTER_URL:8884/mqtt', {
-    username: 'YOUR_USERNAME',
-    password: 'YOUR_PASSWORD',
-    reconnectPeriod: 5000
+  // Connect to HiveMQ Cloud via WebSockets
+  const client = mqtt.connect('wss://c70e75e155fe4621862844b2c027c528.s1.eu.hivemq.cloud:8884/mqtt', {
+    username: 'Zendrii',
+    password: 'B0Kmh99D4N!'
   })
   mqttClient.value = client
 
